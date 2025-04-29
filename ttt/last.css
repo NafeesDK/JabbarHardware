@@ -1,0 +1,343 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f7f7f7;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* About Us Section */
+#about {
+    margin-top: 20px;
+}
+
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.vertical-line {
+    width: 2px;
+    background-color: #ccc;
+    height: 200px; 
+    margin: 0 20px;
+}
+
+.horizontal-line {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: 20px;
+}
+
+.shop-info, .team-members {
+    flex: 1;
+    padding: 10px;
+}
+
+.team-members {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 10px;
+    width: 100%;
+}
+
+.team-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #009688;
+    flex-shrink: 0;
+}
+
+.team-member p {
+    color: white;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.shop-info {
+    text-align: center;
+}
+
+/* Contact Us Section */
+#contact {
+    text-align: center;
+    margin-top: 20px;
+    width: 80%;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 5px;
+    width: 80%; 
+}
+
+.input-container {
+    position: relative;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.input-container input,
+.input-container textarea {
+    background-color: transparent;
+    color: #ccc;
+    border: none;
+    border-bottom: 1px dotted #ccc;
+    outline: none;
+    padding: 5px 0;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+    border-color: #009688;
+}
+
+.input-container label {
+    position: absolute;
+    left: 0;
+    top: 0; 
+    color: #aaa;
+    font-size: 14px; 
+    transition: 0.2s ease all;
+    pointer-events: none; 
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label,
+.input-container textarea:focus + label,
+.input-container textarea:not(:placeholder-shown) + label {
+    top: -20px; 
+    font-size: 12px; 
+    color: #009688; 
+}
+
+/* Textarea specific styles */
+.textarea-container {
+    position: relative;
+}
+
+textarea {
+    min-height: 40px;
+    max-height: 200px; 
+    resize: none; 
+    transition: height 0.2s ease; 
+    padding-top: 20px; 
+}
+
+.char-count {
+    position: absolute;
+    right: 10px; 
+    top: 5px; 
+    font-size: 12px; 
+    color: #aaa; 
+    pointer-events: none; 
+}
+
+.feedback-form .submit-btn {
+    position: relative;
+    padding: 10px 20px;
+    border: 2px solid #009688;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 50%;
+    overflow: hidden;
+    transition: color 0.5s ease;
+    z-index: 10;
+    margin: 20px auto;
+    display: block;
+}
+
+.feedback-form .submit-btn .cover {
+    background: #009688;
+    height: 100%;
+    width: 0%;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: width 0.5s ease;
+}
+
+.feedback-form .submit-btn:hover .cover {
+    width: 100%;
+}
+
+.feedback-form .submit-btn:hover {
+    color: white;
+}
+
+.contact-details {
+    display: right;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+
+.social-media {
+    display: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-icon {
+    margin: 5px;
+    color: white; 
+    font-size: 24px; 
+    text-decoration: none; 
+    transition: color 0.3s; 
+}
+
+.social-icon:hover {
+    color: #009688; 
+}
+
+.Copyrights {
+    align-self: flex-start;
+    margin: 5px 0;
+}
+.designed {
+    align-self: flex-end;
+    margin: -20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vertical-line {
+        display: none;
+    }
+
+    .about-section{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .shop-info, .team-members, .feedback-form, .contact-details {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0; 
+    }
+    .contact-section{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+    }
+
+    .Copyrights, .designed {
+        text-align: center;
+        align-self: center; 
+        margin: 5px 0; 
+    }
+
+    .team-photo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .team-member {
+        gap: 8px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .vertical-line {
+        height: 120px;
+        width: 1.5px;
+    }
+    .Copyrights, .designed {
+        text-align: center; 
+        margin: 5px 0;
+    }
+}
+
+.email-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px; /* Space between the email and code inputs */
+}
+
+.email-input {
+    width: 100%; /* Start with full width */
+    padding: 8px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    transition: width 0.3s ease; /* Smooth transition for width change */
+}
+
+.code-input {
+    width: 0; /* Initially hidden */
+    padding: 8px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    transition: width 0.3s ease; /* Smooth transition for width change */
+    opacity: 0; /* Initially invisible */
+    visibility: hidden; /* Prevents interaction */
+}
+
+.code-input.visible {
+    width: 30%; /* Width when visible */
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Allow interaction */
+}

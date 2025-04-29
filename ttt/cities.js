@@ -1,0 +1,103 @@
+// List of Sri Lankan cities
+const sriLankanCities = [
+  "Colombo", "Dehiwala-Mount Lavinia", "Moratuwa", "Sri Jayawardenepura Kotte", "Negombo",
+  "Kandy", "Galle", "Jaffna", "Trincomalee", "Batticaloa", "Anuradhapura", "Polonnaruwa",
+  "Matara", "Ratnapura", "Badulla", "Kegalle", "Kalutara", "Gampaha", "Nuwara Eliya", "Dambulla",
+  "Matale", "Hambantota", "Ampara", "Chilaw", "Puttalam", "Kurunegala", "Avissawella", "Panadura",
+  "Beruwala", "Weligama", "Tangalle", "Balangoda", "Hatton", "Nawalapitiya", "Bandarawela", "Hikkaduwa",
+  "Kaduwela", "Horana", "Katunayake", "Minuwangoda", "Valvettithurai", "Point Pedro", "Chavakachcheri",
+  "Vavuniya", "Mannar", "Kilinochchi", "Mullaitivu", "Monaragala", "Embilipitiya", "Tissamaharama",
+  "Kattankudy", "Battaramulla", "Malabe", "Boralesgamuwa", "Kotikawatta", "Maharagama", "Kesbewa",
+  "Kaduruwela", "Peliyagoda", "Wattala", "Ja-Ela", "Kelaniya", "Ragama", "Mahabage", "Seeduwa",
+  "Kandana", "Wennappuwa", "Marawila", "Piliyandala", "Homagama", "Kottawa", "Hanwella", "Padukka",
+  "Mirigama", "Divulapitiya", "Gampola", "Nattandiya", "Dankotuwa", "Pannipitiya", "Athurugiriya",
+  "Kolonnawa", "Kohuwala", "Ratmalana", "Mount Lavinia", "Moratumulla", "Wellawatte", "Bambalapitiya",
+  "Havelock Town", "Kirulapone", "Thimbirigasyaya", "Kollupitiya", "Rajagiriya", "Ethul Kotte",
+  "Akkaraipattu", "Kalmunai", "Sammanthurai", "Ambalangoda", "Haputale", "Ella", "Dickwella",
+  "Kinniya", "Mutur", "Verugal", "Nilaveli", "Uppuveli", "Pasikudah", "Kalkudah", "Arugam Bay",
+  "Pottuvil", "Yala", "Kataragama", "Buttala", "Wellawaya", "Bibile", "Medawachchiya", "Medirigiriya",
+  "Hingurakgoda", "Kekirawa", "Galewela", "Dambadeniya", "Kuliyapitiya", "Nikaweratiya", "Wariyapola",
+  "Padeniya", "Narammala", "Ibbagamuwa", "Melsiripura", "Galgamuwa", "Polgahawela", "Alawwa", "Bingiriya",
+  "Kochchikade", "Mundalama", "Sirambiadiya", "Madampe", "Nawagattegama", "Pallama", "Anamaduwa",
+  "Giriulla", "Pannala", "Gokarella", "Kobeigane", "Galagedara", "Akurana", "Kundasale", "Kadugannawa",
+  "Pilimatalawa", "Wattegama", "Gelioya", "Peradeniya", "Katugastota", "Digana", "Pussellawa", "Rikillagaskada",
+  "Hataraliyadda", "Galaboda", "Madulkelle", "Knuckles", "Laggala", "Pallegama", "Rattota", "Naula", "Sigiriya",
+  "Inamaluwa", "Yatawatta", "Palapathwela", "Sainthamaruthu", "Ninthavur", "Maruthamunai", "Karaitivu",
+  "Addalaichenai", "Alayadi Vembu", "Thirukkovil", "Oluvil", "Irakkamam", "Komari", "Panama", "Uhana",
+  "Maha Oya", "Kalkudah", "Valaichchenai", "Eravur", "Vakarai", "Kaluwanchikudy", "Oddamavadi", "Paddiruppu",
+  "Vellavely", "Mamangam", "Arayampathy", "Kiran", "Vanathavilluwa", "Mandur", "Punanai", "Vavunathivu",
+  "Chenkaladi", "Kurukkalmadam", "Mankerny", "Puthukudiyiruppu", "Thirupalugamam", "Unnichchai",
+  "Gomarankadawala", "Kantalai", "Morawewa", "Kuchchaveli", "Pulmoddai", "Bakmitiyawa", "Nallur",
+  "Velanai", "Nelliady", "Chunnakam", "Sandilipay", "Tellippalai", "Maruthankerny", "Kopay",
+  "Uduvil", "Atchuveli", "Manipay", "Paranthan", "Pallai", "Elephant Pass", "Pooneryn", "Ragala",
+  "Bundala", "Angunukolapelessa", "Katuwana", "Barawakumbuka", "Ranna", "Kalametiya", "Kirinda",
+  "Millaniya", "Baduraliya", "Panduwasnuwara", "Rideegama", "Ganewatta", "Giribawa", "Ambanpola",
+  "Polpithigama", "Haldummulla", "Siyambalanduwa", "Thanamalvila", "Medagama", "Badalkumbura",
+  "Sevanagala", "Pelmadulla", "Eheliyagoda", "Kuruwita", "Nivitigala", "Godakawela", "Kahawatta",
+  "Rakwana", "Dehiowita", "Deraniyagala", "Aranayake", "Mawanella", "Rambukkana", "Warakapola",
+  "Galigamuwa", "Yatiyantota", "Ruwanwella"
+];
+
+// Function to set up autocomplete
+function setupCityAutocomplete() {
+  const cityInput = document.getElementById('city');
+  let cityDropdown = document.getElementById('cityDropdown');
+  
+  // Create dropdown if it doesn't exist
+  if (!cityDropdown) {
+    cityDropdown = document.createElement('div');
+    cityDropdown.id = 'cityDropdown';
+    cityDropdown.className = 'city-dropdown';
+    cityInput.parentNode.appendChild(cityDropdown);
+  }
+  
+  // Handle input event for live filtering
+  cityInput.addEventListener('input', function() {
+    const inputValue = this.value.toLowerCase();
+    
+    // Clear previous dropdown content
+    cityDropdown.innerHTML = '';
+    
+    if (inputValue.length < 1) {
+      cityDropdown.style.display = 'none';
+      return;
+    }
+    
+    // Filter cities that match input
+    const matchedCities = sriLankanCities.filter(city => 
+      city.toLowerCase().includes(inputValue)
+    );
+    
+    // Show dropdown if we have matches
+    if (matchedCities.length > 0) {
+      cityDropdown.style.display = 'block';
+      
+      // Add matched cities to dropdown
+      matchedCities.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        item.textContent = city;
+        
+        // Handle click on city
+        item.addEventListener('click', function() {
+          cityInput.value = city;
+          cityDropdown.style.display = 'none';
+        });
+        
+        cityDropdown.appendChild(item);
+      });
+    } else {
+      cityDropdown.style.display = 'none';
+    }
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (e.target !== cityInput && e.target !== cityDropdown) {
+      cityDropdown.style.display = 'none';
+    }
+  });
+}
+
+// Initialize when document is loaded
+document.addEventListener('DOMContentLoaded', setupCityAutocomplete);

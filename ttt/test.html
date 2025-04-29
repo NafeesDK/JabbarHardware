@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strips with Gap</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+            font-family: Arial, sans-serif;
+        }
+
+        .strip {
+            flex: 1; /* Each strip takes up half the height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            overflow: hidden; /* Prevent text overflow */
+            margin-bottom: 30px; /* Add a small gap between strips */
+        }
+
+        .offer-strip {
+            background-color: #ff5733; /* Orange for offer */
+            font-size: calc(90vh / 2); /* Dynamically adjust text size */
+        }
+
+        .regular-strip {
+            background-color: #3498db; /* Blue for regular */
+            font-size: calc(90vh / 2); /* Dynamically adjust text size */
+        }
+
+        /* Prevent extra space below the last strip */
+        .strip:last-child {
+            margin-bottom: 0;
+        }
+
+        .strip span {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Responsive adjustments for tablet size */
+        @media (max-width: 1024px) {
+            .strip {
+                flex: 1 0 100%; /* Adjust flex basis for tablet screens */
+                font-size: 2rem; /* Adjust font size for tablet screens */
+            }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .strip {
+                flex: 1 0 100%; /* Adjust flex basis for smaller screens */
+                font-size: 1.5rem; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="strip offer-strip">
+        <span>OFFER</span>
+    </div>
+    <div class="strip regular-strip">
+        <span>REGULAR</span>
+    </div>
+</body>
+</html>

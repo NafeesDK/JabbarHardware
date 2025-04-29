@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #121212; 
+    color: #e0e0e0; 
+}
+
+
+.bright-bg {
+    background-color: rgba(30, 30, 30, 0.8); 
+    width: 100vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.bright-bg::before {
+    content: 'OFFER';
+    position: absolute;
+    top: 10px;
+    left: 120px;
+    padding: 5px 15px;
+    background-color: #009688; 
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.bright-bg .price-container {
+    color: #e0e0e0; 
+}
+
+.bright-bg .original-price {
+    text-decoration: line-through;
+    color: #ff0000; 
+    font-weight: normal;
+    font-size: 0.8em;
+}
+
+.bright-bg .discounted-price {
+    color: white; 
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+.dark-bg {
+    background-color: rgba(51, 51, 51, 0.8); 
+    width: 100vw;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.dark-bg::before {
+    content: 'REGULAR';
+    position: absolute;
+    top: 10px;
+    left: 120px;
+    padding: 5px 15px;
+    background-color: #4CAF50; 
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.menu-grid {
+    display: flex;
+    width: 100%;
+    max-width: 1060px;
+    overflow: auto;
+    gap: 15px;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    position: relative;  
+    scroll-snap-type: x mandatory;  
+    padding: 0;
+    margin: 0;
+    
+}
+
+.menu-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.pre-btn,
+.nxt-btn {
+  border: none;
+  width: 10vw;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #000000 100%);
+  cursor: pointer;
+  z-index: 8;
+}
+
+.pre-btn {
+  left: 0;
+  transform: rotate(180deg);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #000000 100%); 
+}
+
+.nxt-btn {
+  right: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #000000 100%);
+}
+
+.pre-btn img,
+.nxt-btn img {
+  opacity: 0.2;
+}
+
+.pre-btn:hover img,
+.nxt-btn:hover img {
+  opacity: 1;
+}
+
+.card {
+    flex: 0 0 200px; 
+    height: 300px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); 
+    background: rgba(20, 20, 20, 0.9); 
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card .imgBx img {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
+    display: block; 
+}
+
+
+.card .content {
+    position: absolute;
+    bottom: -160px;
+    width: 100%;
+    height: 160px;
+    border-radius: 20px;
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    transition: bottom 0.5s, opacity 0.5s, background-color 0.3s ease; 
+    opacity: 0;
+    background: rgba(30, 30, 30, 0.8); 
+}
+
+.card:hover .content,
+.card.active .content {
+    bottom: 0;
+    opacity: 1;
+    background: rgba(43, 42, 42, 0.9); 
+}
+
+.card .content .contentBx h3 {
+    color: #0deed7; 
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
+    line-height: 1.2em;
+    font-weight: 500;
+}
+
+.card .content .contentBx p {
+    color: #06e4ce; 
+    font-size: 12px; 
+    text-align: center;
+    margin: 5px 0;
+}
+
+.card .content .contentBx .price-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+    color: #fff; 
+}
+/* OFFER PRODUCTS STYLE (bright-bg) */
+.bright-bg .card .content .contentBx .price-container {
+    color: #fff;
+}
+
+.bright-bg .card .original-price {
+    text-decoration: line-through;
+    color: #ff0000;
+    opacity: 0.7;
+}
+
+.bright-bg .card .discounted-price {
+    color: white;
+    font-weight: normal;
+}
+
+/* REGULAR PRODUCTS STYLE (dark-bg) */
+.dark-bg .card .original-price {
+    text-decoration: none;
+    color: #fff;
+    font-weight: normal;
+}
+
+/* POPUP PRICES — common setup */
+#popupOriginalPrice {
+    color: #ff0000;
+    opacity: 0.7;
+}
+
+/* If no discount, remove line-through dynamically via JS (default to none) */
+#popupOriginalPrice.no-discount {
+    text-decoration: none;
+    color: #fff;
+    opacity: 1;
+}
+
+/* Discounted price in popup (show only when available) */
+#popupDiscountedPrice {
+    color: white;
+    font-weight: normal;
+}
+
+.card-btn.add-to-cart,
+.card-btn.order-now {
+    padding: 5px 10px; 
+    font-size: 0.8rem; 
+    border: none; 
+    border-radius: 25px; 
+    background-color: #009688; 
+    color: white; 
+    font-weight: normal; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.card-btn.add-to-cart:hover,
+.card-btn.order-now:hover {
+    background-color: #00796b; 
+    font-weight: bold; 
+}
+
+@media (max-width: 768px) {
+    .menu-grid {
+        width: 100%; 
+    }
+    .card {
+        flex: 0 0 150px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-left, .scroll-right {
+        font-size: 1.5rem; 
+    }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="Vwcart.css">
+
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+        <button class="back-to-home" onclick="window.history.back();">Back to Home
+            <span class="cover"></span>
+        </button>
+    </header>
+    <main>
+        <div class="cart-container">
+            <div class="cart-grid" id="cartItems">
+            </div>
+        </div>
+    </main>
+
+    <div class="cd-popup" id="confirmation-popup">
+        <div class="cd-popup-container">
+            <p id="confirmation-message">Are you sure you want to delete this item from your cart?</p>
+            <label for="delete-quantity">How many to delete:</label>
+            <input type="number" id="delete-quantity" min="1" value="1" />
+            <ul class="cd-buttons">
+                <li><a id="confirm-delete" class="card-btn confirm">Confirm</a></li>
+                <li><a id="cancel-delete" class="card-btn cancel">Cancel</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+
+            document.getElementById('confirm-delete').addEventListener('click', () => {
+                if (productIdToDelete) {
+                    deleteProduct(productIdToDelete); 
+                    document.getElementById('confirmation-popup').style.display = 'none';
+                }
+            });
+
+            document.getElementById('cancel-delete').addEventListener('click', () => {
+                document.getElementById('confirmation-popup').style.display = 'none'; // Hide the popup
+            });
+
+        });
+
+
+        function fetchProducts() {
+            fetch('fetchCart.php') // Ensure this file fetches all products
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayProducts(data.data);
+                    } else {
+                        console.error('Failed to fetch products');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function displayProducts(products) {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = ''; // Clear previous items
+
+            if (products.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">No products available</p>';
+                return;
+            }
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'card'; 
+
+                const hasDiscount = product.discounted_price && parseFloat(product.discounted_price) > 0;
+
+                productCard.innerHTML = `
+                    <div class="imgBx">
+                        <img src="${product.image_url}" alt="${product.name}">
+                        <span class="close-btn" onclick="showConfirmationPopup(${product.id}, '${product.name}')">&times;</span>
+                    </div>
+                    <div class="content">
+                        <div class="contentBx">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <div class="price-container">
+                                <span class="original-price ${hasDiscount ? '' : 'no-discount'}">
+                                    LKR. ${parseFloat(product.original_price).toFixed(2)}
+                                </span>
+                                ${hasDiscount ? `<span class="discounted-price">LKR. ${parseFloat(product.discounted_price).toFixed(2)}</span>` : ''}
+                            </div>
+                            <p class="quantity">Quantity: ${product.quantity}</p>
+                            <button class="order-now" onclick="orderNow(${product.id})">Order Now</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(productCard);
+            });
+
+        }
+        
+        function orderNow(productId) {
+            console.log(`Order placed for product ID: ${productId}`);
+        }
+
+        let productIdToDelete = null;
+        let productQuantityToDelete = 1;
+
+        function showConfirmationPopup(productId, productName) {
+        
+            const productCard = document.querySelector(`.card [onclick*="showConfirmationPopup(${productId}"]`).closest('.card');
+            const quantityText = productCard.querySelector('.quantity').textContent;
+            const currentQuantity = parseInt(quantityText.replace('Quantity: ', ''));
+            
+            const popup = document.getElementById('confirmation-popup');
+            if (popup) {
+                popup.style.display = 'flex';
+                productIdToDelete = productId; 
+
+                // Update the confirmation message with the product name
+                document.getElementById('confirmation-message').innerText = 
+                    `Are you sure you want to delete ${productName} from your cart?`;
+
+                // Set the max value for the quantity input
+                const quantityInput = document.getElementById('delete-quantity');
+                quantityInput.max = currentQuantity; // Set max to the available quantity
+                quantityInput.value = 1; // Reset to 1
+            }
+        }
+
+        document.getElementById('confirm-delete').addEventListener('click', () => {
+            const quantityToDelete = parseInt(document.getElementById('delete-quantity').value);
+            if (productIdToDelete && quantityToDelete > 0) {
+                deleteProduct(productIdToDelete, quantityToDelete); // Call the delete function with quantity
+                document.getElementById('confirmation-popup').style.display = 'none'; // Hide the popup
+            }
+        });
+        function deleteProduct(productId, quantity) {
+            fetch('cartDelete.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${productId}&quantity=${quantity}` // Send both id and quantity
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Product deleted successfully');
+                    location.reload(); // Reload the page to show updated cart
+                } else {
+                    console.error('Error deleting product:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting product:', error);
+            });
+        }
+    </script>
+</body>
+</html>
