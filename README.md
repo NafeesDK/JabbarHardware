@@ -1,5 +1,5 @@
 PLEASE READ BEFORE CHECKING MY CODES SOME CONDITIONS ARE THERE
-NOTE :- When you login the ADMIN side page and in a new tab open the GODOWN ADMIN and refresh the tab which the ADMIN is logged it will switch the page from ADMINS page to GODOWN ADMIN page so when switching kindly logout and check the if you would refresh page...
+NOTE :- When you login the ADMIN side page (admin/aaa.php) and in a new tab open the GODOWN ADMIN (admin/godown.php) and refresh the tab which the ADMIN is logged it will switch the page from ADMINS page to GODOWN ADMIN page so when switching kindly logout and check the page if you would refresh page...
 This is not a problem since the GODOWN ADMIN and ADMIN wont be working in the same device in real life.
 
 The folder is zipped because it has more than 100 files so cant upload at once,
